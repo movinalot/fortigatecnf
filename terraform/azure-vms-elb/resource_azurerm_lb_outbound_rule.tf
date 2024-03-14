@@ -1,6 +1,3 @@
-locals {
-  
-}
 resource "azurerm_lb_outbound_rule" "lb_outbound_rule" {
   for_each = local.lb_outbound_rules
 

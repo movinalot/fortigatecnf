@@ -2,8 +2,9 @@ locals {
   username = "azureuser"
   password = "Password123!!"
 
-  resource_group_name = "${var.prefix}rg-fortigatecnf-vm"
-  location            = "eastus"
+  resource_group_suffix = "rg-fortigatecnf-vm"
+  resource_group_name   = var.prefix != null ? "${var.prefix}-${local.resource_group_suffix}" : local.resource_group_suffix
+  location              = "eastus"
 
   virtual_network_name_01 = "vnet-cnf"
 

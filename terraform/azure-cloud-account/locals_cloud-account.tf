@@ -53,7 +53,7 @@ locals {
 
   # Assigning Privileged Roles to the Managed Identities requires that the authenticated
   # user or service principal has the role of "Privileged Role Administrator"
-  assign_directory_roles = false
+  assign_directory_roles = true
 
   # Tenant/Directory Roles that will be assigned to the Managed Identity
   directory_role_definition_names = ["Application Administrator"]

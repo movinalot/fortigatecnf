@@ -16,6 +16,8 @@ locals {
       location = local.location
       tags = {
         Environment = local.environment_tag
+        Username    = var.username
+        CostCenter  = var.costcenter
       }
     }
   }
@@ -57,14 +59,14 @@ locals {
 
       name                 = "snet-public"
       virtual_network_name = azurerm_virtual_network.virtual_network[local.virtual_network_name_01].name
-      address_prefixes     = [cidrsubnet(azurerm_virtual_network.virtual_network[local.virtual_network_name_01].address_space[0], 8, 0)]
+      address_prefixes     = [cidrsubnet(tolist(azurerm_virtual_network.virtual_network[local.virtual_network_name_01].address_space)[0], 8, 0)]
     }
     "snet-webservers" = {
       resource_group_name = azurerm_resource_group.resource_group[local.resource_group_name].name
 
       name                 = "snet-webservers"
       virtual_network_name = azurerm_virtual_network.virtual_network[local.virtual_network_name_01].name
-      address_prefixes     = [cidrsubnet(azurerm_virtual_network.virtual_network[local.virtual_network_name_01].address_space[0], 8, 1)]
+      address_prefixes     = [cidrsubnet(tolist(azurerm_virtual_network.virtual_network[local.virtual_network_name_01].address_space)[0], 8, 1)]
     }
   }
 
@@ -73,9 +75,9 @@ locals {
       resource_group_name = azurerm_resource_group.resource_group[local.resource_group_name].name
       location            = azurerm_resource_group.resource_group[local.resource_group_name].location
 
-      name                          = "nic-web-1-eth1"
-      enable_ip_forwarding          = false
-      enable_accelerated_networking = false
+      name                           = "nic-web-1-eth1"
+      ip_forwarding_enabled          = false
+      accelerated_networking_enabled = false
 
       ip_configurations = [
         {

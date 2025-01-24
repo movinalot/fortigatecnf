@@ -7,6 +7,8 @@ locals {
   location              = "eastus"
 
   environment_tag = "CNF Account"
+  username_tag    = var.username
+  costcenter_tag  = var.costcenter
 
   resource_groups = {
     (local.resource_group_name) = {
